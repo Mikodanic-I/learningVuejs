@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue lifecycle hooks</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<img src="https://vuejs.org/images/lifecycle.png" style="width: 50%; display: block; margin: auto;">
+<script>
+    //there are mounted, updated and destroyed hooks
+    var app = new Vue({
+        data: {
+            a: 1
+        }, 
+        created: function() {
+            //'this' points to the vm instance
+            console.log('a is: ' + this.a)
+        }
+    })
+    // returns "a is: 1"
+</script>
+</body>
+</html>

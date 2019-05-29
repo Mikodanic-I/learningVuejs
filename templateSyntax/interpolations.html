@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue interpolations</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+    #vBindId{
+        color: red;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h4>Text interpolations</h4>
+    <p>This message was created using "Mustache" syntax: <br>
+        {{ basicMessage }} 
+    </p>
+    <p v-once>This message can't change: <br>
+        {{ notChangeableMessage }}
+    </p>
+
+    <h4>Raw HTML interpolations</h4>
+    <p>Using mustaches: {{ htmlMessage }}</p>
+    <p>Using v-html directive: <span v-html="htmlMessage"></span></p>
+
+    <h4>Attributes</h4>
+    <p>V-bind attributes</p>
+
+    <p>v-bind:id on a div
+        <div v-bind:id="dynamicId">Some text</div>
+
+    </p>
+    -----------------------
+    <p>V-bind:disabled on a button 
+        <br>
+        <button v-on:click="isButtonDisabled = false">Enable it-----></button>
+        <button v-bind:disabled="isButtonDisabled">Button</button>
+        <button v-on:click="isButtonDisabled = true"><-----Disable it</button>
+    </p>
+
+    <h4>JavaScript Expressions</h4>
+    <!--Statements and flow control don't work, for example.  
+        {{ var a = 4 }} and 
+        {{ if (ok) { return } }} 
+        
+        don't work-->
+    <p>{{ number + 2 }}</p>
+    
+    <p>Is this ok?
+    <br>
+    {{ ok ? 'YES' : 'NO' }}
+    </p>
+</div>
+
+<script>
+var app = new Vue({
+    el: '#app',
+
+    data: {
+        basicMessage: 'Some basic message',
+        notChangeableMessage: 'This message will never be changed!',
+        htmlMessage: '<b><i>Thiis is some cool looking text if implemented right</i></b>',
+        dynamicId: 'vBindId',
+        isButtonDisabled: false,
+        number: 5,
+        ok: true,
+    }
+})
+
+</script>
+</body>
+</html>

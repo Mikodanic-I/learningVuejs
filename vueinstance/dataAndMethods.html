@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a Vue instance</title>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{ a }}</p>
+
+        <button v-on:click="a = a - 1">-</button>
+        <button v-on:click="a = a + 1">+</button>
+    </div>
+</body>
+</html>
+<script>
+    //Some data object
+    var data = { a: 1 }
+
+    //When this function is applied data can't be changed from initial one
+    //Object.freeze(data)
+    
+    //Creating a vue instance with vue function
+    var vm = new Vue({
+        el: '#app',
+
+        data: data
+    })
+    //Getting the property on the instance
+    vm.a == data.a // returns true
+
+    //Setting the property on the instance
+    vm.a = 2
+    data.a // returns 2
+
+    //... vice-versa
+    data.a = 3
+    vm.a // returns 3
+
+    console.log(vm.$data)
+
+    vm.$data === data // returns true
+    vm.$el === document.getElementById('app') // returns true
+
+    //$watch - instance method
+    vm.$watch('a', function(newValue, oldValue) {
+        //This will be called when value a changes
+        console.log(vm.a)
+    })
+</script>

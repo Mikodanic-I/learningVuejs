@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue directives</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<h2>Directives are special attributes with v- prefix</h2>
+
+<h4>V-if directive</h4>
+<p v-if="seen">Now you see me</p> <button v-on:click="seen = false">Now you don't</button>
+
+<h4>V-bind directive</h4>
+<p>
+    Used to reactively update a HTML attribute
+    <br>
+    <a v-bind:href="url" target="_blank">This url is reactively binded</a>
+</p>
+
+<h4>V-hover directive</h4>
+<p>
+    Listens to hover event, can also listen to some other DOM event
+    <br>
+    <span v-on:mouseover="magic = false" v-if="magic">Hover to see me disappear</span>
+</p>
+
+<h3>Dynamic arguments</h3>
+<p>
+    You can't write anything in me.
+    <input type="text" v-on:[eventName]="show = false" v-if="show">
+    <!--[eventName] is converted to eventname in in DOM-templates ///////
+    ////////AVOID USING UPPERCASE LETTERS, SPACES, QUOTES, ...///////////
+    -->
+</p>
+
+<h2>Shorthands</h2>
+<!--//V-bind shorthand-->
+<a :href="url">Don't click me!</a>
+<br>
+<!--//V-on shorthand-->
+<span @click="show=false" v-if="show">Click me.</span>
+</div>
+<script>
+
+var app = new Vue({
+    el: '#app',
+
+    data: {
+        seen: true,
+        url: 'https://www.google.com/',
+        magic: true,
+        eventname: "focus",
+        show: true,
+    }
+
+})
+
+</script>
+</body>
+</html>

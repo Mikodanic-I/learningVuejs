@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Change Detection Caveats</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<h2>Object Change Detection Caveats</h2>
+How old is {{ userProfile.name }}?
+<button v-on:click="addAge()">Add age</button>
+<span v-if="userProfile.age">
+    {{ userProfile.name}}'s {{ userProfile.age }} years old.
+</span>
+<br>
+<button v-on:click="addNewProperties()">Add new info</button>
+<br>
+{{ userProfile.name}}'s {{ userProfile.age }} years old and her favorite food is {{ userProfile.favoriteFood }}!!
+</div>
+<script>
+var vm = new Vue({
+    el: '#app',
+
+    data: {
+        userProfile: {
+            name: 'Durdica',
+        }
+    },
+
+    methods: {
+        addAge: function() {
+            Vue.set(vm.userProfile, 'age', 65)
+        },
+        addNewProperties: function () {
+            vm.userProfile = Object.assign({}, vm.userProfile, {
+                age: 16,
+                favoriteFood: 'Sarma'
+            })
+        }
+    }
+})    
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Conditionals and Loops</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app3">
+	<span v-if="seen">Woow, you can see me</span>
+</div>
+
+<div id="app-4">
+	<ol>
+		<li v-for="user in users">
+				{{ user.name }}
+			
+		</li>
+	</ol>
+</div>
+<script type="text/javascript">
+	var app3 = new Vue({
+		el: "#app3",
+
+		data: {
+			seen: true
+		}
+	})
+
+	var app4 = new Vue({
+		el: "#app-4",
+		data: {
+			users: [
+				{name: "Marko"},
+				{name: "Viktor"},
+				{name: "Iva"},
+				{name: "Matej"}
+			]
+		}
+	})
+</script>
+</body>
+</html>

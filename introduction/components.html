@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Components</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">	
+	<ol>
+	  <!-- Create an instance of the todo-item component -->
+	  <user-list
+	  v-for="user in users"
+	  v-bind:users="user"
+	  v-bind:key="user.id"></user-list>
+	</ol>
+</div>
+
+<script type="text/javascript">
+Vue.component('user-list', {
+	props: ['users'], 
+  	template: '<li>{{ users.name }}</li>'
+})
+
+var app = new Vue({
+	el: "#app",
+
+	data: {
+		users: [
+			{id: 0, name: 'Marko'},
+			{id: 1, name: 'Iva'}, 
+			{id: 2, name: 'Zdenko'}
+		]
+	}
+})
+</script>
+</body>
+</html>

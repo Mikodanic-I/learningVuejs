@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-if conditional rendering</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<h3>V-if</h3>
+<h5 v-if="awesome">Woow this header is awesome</h5>
+<h5 v-else>But this one isn't</h5>
+
+<h3>Conditional Groups</h3>
+
+<template v-if="ok">
+    <h4>What a nice section</h2>
+    <p>First paragraph yeet</p>
+    <p>Is this section ok?</p>
+</template>
+
+<h3>V-else</h3>
+<div v-if="Math.random() > 0.5">
+    There is a 50% chance you will see me!
+</div>
+<div v-else>
+    Also 50% chance to see me
+</div>
+
+<h3>V-else-if</h3>
+Type in either A, B or C<input type="text" v-model="letter">
+<br>
+<span v-if="letter === 'A'">Wow you typed in A</span>
+<span v-else-if="letter === 'B'">Niceee, very nice B</span>
+<span v-else-if="letter === 'C'">Ccccccc...</span>
+<span v-else>Neither one?? So disappointed. :(</span>
+
+<h3>Controlling Reusable Elements with a key</h3>
+<template v-if="covered">
+<label>Password</label>
+<input type="password">
+</template>
+<template v-else>
+    <label>Password</label>
+    <input type="text">
+</template>
+<button v-on:click="togglePassword()">{{ passBtnTxt }}</button>
+
+<br><br>
+
+<template v-if="loginType === 'email'">
+    <label>Email</label>
+    <input type="text" key="email-input" placeholder="Enter email adress">
+</template>
+<template v-else>
+    <label>Username</label>
+    <input type="text" key="username-input" placeholder="Enter username">
+</template>
+<button v-on:click="toggleInputs()">Toggle input</button>
+
+<h3>V-show</h3>
+<span v-show="ok">Heyo!</span>
+
+<h3>v-if VS v-show</h3>
+
+<b>V-show</b> doesn't support template element and it doesn't work with v-else. It still remains in the DOM, v-show only toggles the display CSS property.
+<br>
+<b>V-if</b> it ensures that event listeners and child components inside the block are properly destroyed and re-created.
+<br>
+
+<b>Prefer v-show if you toggle something often and v-if if the condition is unlikely to change at runtime.</b>
+
+
+<h3>Using v-if and v-for together is not recommended</h3>
+</div>
+<script>
+var vm = new Vue({
+    el: '#app',
+
+    data: {
+        awesome: true,
+        ok: true,
+        letter: null,
+        covered: true,
+        passBtnTxt: 'See',
+        loginType: 'email'
+    },
+
+    methods: {
+        togglePassword: function () {
+            if(this.covered) {
+                this.covered = false
+                this.passBtnTxt = 'Cover'
+            } else {
+                this.covered = true
+                this.passBtnTxt = 'See'
+            }
+        },
+        toggleInputs: function () {
+            if(this.loginType === 'email') {
+                this.loginType = 'username'
+            } else {
+                this.loginType = 'email'
+            }
+        }
+    }
+
+})
+</script>
+</body>
+</html>

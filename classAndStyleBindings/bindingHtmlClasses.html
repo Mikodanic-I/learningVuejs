@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binding Html Classes</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+    .active{
+        color:purple;
+        font-weight: 900;
+        font-family: monospace;
+    }
+    .errorText{
+        background-color: red;
+        font-family: sans-serif;
+        color: white;
+    }
+    </style>
+</head>
+<body>
+<div id="app">
+<h3>Object Syntax</h3>
+<div v-bind:class="{ active: isActive }">This text has a class binded to it
+    <button v-on:click="toggleClass()">Click to toggle a class</button>
+</div>
+<h5>Class object</h5>
+<span v-bind:class="classObject">This will be red when there is an error!</span>
+
+<h3>Array Syntax</h3>
+<div v-bind:class="[activeClass, errorClass]">This div has 2 classes using Array Syntax</div>
+</div>
+<script>
+var vm = new Vue({
+    el: '#app',
+
+    data: {
+        isActive: true,
+        classObject: {
+            active: true,
+            errorText: false,
+        },
+        errorClass: 'errorText',
+        activeClass: 'active'
+    },
+    
+    methods: {
+        toggleClass: function () {
+            if(this.isActive) {
+                this.isActive = false
+            } else {
+                this.isActive = true
+            }
+        }
+    }
+
+
+})
+</script>
+</body>
+</html>

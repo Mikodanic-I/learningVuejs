@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Change Detection</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>Mutation methods</h3>
+    <input type="text" v-model="username">
+    <button v-on:click="pushUsername()">Add player</button>
+    <ol>
+        <li v-for="player in players">
+            {{player.usrnm}}
+
+        </li>
+    </ol>
+    <button v-on:click="popUsername()">Delete last player</button>
+
+    <h3>Replacing an Array</h3>
+    <button v-on:click="filterPlayers()">Click to filter the previous array</button>
+    <ol>
+        <li v-for="player in filteredPlayers">
+            {{player.usrnm}}
+
+        </li>
+    </ol>
+
+    <h3>Caveats</h3>
+    <p>Vue cannot detect setting an item with the index or when modifying the length of an array</p>
+    <ol>
+        <li v-for="player in playersCaveats">
+            {{player.usrnm}}
+        </li>
+    </ol>
+    <input type="text" v-model="username">
+    <button v-on:click="addPlayer()">Add a player to third place</button>
+</div>
+<script>
+var vm = new Vue({
+    el: "#app",
+
+    data: {
+        players: [
+            {usrnm: 'Jovan'},
+            {usrnm: 'Brodo'},
+            {usrnm: 'Movan'},
+            {usrnm: 'Jozo'},
+            {usrnm: 'Zuro'},
+
+        ],
+        username: null,
+        filteredPlayers: null,
+        playersCaveats: [
+            {usrnm: 'Jovan'},
+            {usrnm: 'Brodo'},
+            {usrnm: 'Movan'},
+            {usrnm: 'Jozo'},
+            {usrnm: 'Zuro'},
+
+        ]
+    },
+
+    methods: {
+        pushUsername: function() {
+            this.players.push({usrnm: this.username})
+        },
+        popUsername: function() {
+            this.players.pop()
+        },
+        filterPlayers: function() {
+            this.filteredPlayers = this.players.filter(function(player) {
+                return player.usrnm.match(/Jozo/)
+            })
+        },
+        addPlayer: function() {
+            console.log(this.username)
+            vm.$set(vm.playersCaveats, 2, {usrnm: this.username})
+        }
+    }
+
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binding Inline Styles</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+<div id="app">
+<p v-bind:style="{ color: txtColor, backgroundColor: bgColor}">This text has binded style</p>
+
+<p v-bind:style="styleObject">This looks much cleaner in code</p>
+
+<p v-bind:style="[ styleObject, anotherStyleObject ]">Array Syntax, 2 style objects in one element</p>
+</div>
+<script>
+var vm = new Vue({
+    el: '#app',
+
+    data: {
+        bgColor: 'black',
+        txtColor: 'white',
+        styleObject: {
+            fontFamily: 'monospace',
+            color: 'gray',
+            fontSize: '20px'
+        },
+        anotherStyleObject: {
+            backgroundColor: 'yellow',
+            width: 'fit-content'
+        }
+
+    }
+
+})
+
+</script>
+</body>
+</html>
